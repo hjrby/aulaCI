@@ -12,6 +12,11 @@ class Olamundo extends CI_Controller {
 		
 	}
 	
+	public function gitTeste()
+	{
+		
+	}
+
 	public function ex3()
 	{
 		$dados = array(
