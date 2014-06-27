@@ -16,6 +16,34 @@
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<style type="text/css">
+			form{
+				margin:10px;
+			}
+			form label {
+				display:block;
+			}
+			form input[type=text]{
+				width:250px;
+				border:1px solid #ggg;
+				padding:5px;
+			}
+			form input[type=password]{
+				width:150px;
+				border:1px solid #ggg;
+				padding:5px;
+			}
+			form input[type=text]:focus, form input[type=password]:focus{
+				border:1px solid #0cf;
+			}
+			form input[type=submit]{
+				width:250px;
+				border:1px solid #ggg;
+				cursor: pointer;
+				display: block;
+				margin-top: 10px;
+			}
+		</style>
 	</head>
 
 	<body>
