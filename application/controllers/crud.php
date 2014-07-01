@@ -13,11 +13,14 @@ class Crud extends CI_Controller {
 		// carrega a parte de validacao do form do codeigniter
 		$this->load->library('form_validation');
 		
-		// carrega o modulo que tem o acesso aos dados
+		// carrega o modulo que tem o acesso aos dados e da um apelido para ele
 		$this->load->model('crud_model','crud');
 		
 		// gerencia a sessao entre Model -> Control -> View e aplicacao
 		$this->load->library('session');
+		
+		// gerencia uma tabela na view 
+		$this->load->library('table');
 		
 	}
 	
@@ -70,13 +73,38 @@ class Crud extends CI_Controller {
 		
 		$dados = array(
 			'titulo'=>'Crud &raquo; Retrieve',
-			'tela'=>'retrieve'
+			'tela'=>'retrieve',
+			'usuarios'=>$this->crud->get_all()->result()
 		);
 		
 		$this->load->view('crud',$dados);	
 	}
 	
 	public function update(){
+		
+		//mensagem de erro 
+		$this->form_validation->set_message('required','O campo %s é obrigatório');
+		$this->form_validation->set_message('alpha','O campo %s não aceita número e caracteres especiais');
+		$this->form_validation->set_message('max_length','O campo %s passou do tamanho de %s caracteres');
+		$this->form_validation->set_message('is_unique','O campo %s já está cadastrado no banco de dados');
+		$this->form_validation->set_message('matches','O campo %s está diferente do campo %s ');
+		
+		
+		// validacao 
+		$this->form_validation->set_rules('nome','NOME','trim|required|max_length[50]|ucwords');
+		$this->form_validation->set_rules('senha','SENHA','trim|required|max_lenght[50]');
+		$this->form_validation->set_rules('senha2','REPITA A SENHA','trim|required|max_lenght[50]|matches[senha]');
+		//executa a validacao
+		if($this->form_validation->run() == TRUE):
+			//echo 'Validacao ok pode inserir no banco de dados';
+			
+			$dados = elements(array('nome','senha'), $this->input->post());
+			$dados['senha'] = md5($dados['senha']);
+			
+			//print_r($dados);
+			//$this->crud->do_insert($dados);
+			$this->crud->do_update($dados,array('id'=>$this->input->post('idusuario') )); //ele pega o campo idusuario que do tipo hidden do formulario quando houver o post
+		endif;
 		
 		$dados = array(
 			'titulo'=>'Crud &raquo; Update',
@@ -87,6 +115,10 @@ class Crud extends CI_Controller {
 	}
 	
 	public function delete(){
+		
+		if($this->input->post('idusuario') > 0):
+			$this->crud->do_delete(array('id'=>$this->input->post('idusuario') ));
+		endif;
 		
 		$dados = array(
 			'titulo'=>'Crud &raquo; Delete',
