@@ -22,6 +22,9 @@ class Crud extends CI_Controller {
 		// gerencia uma tabela na view 
 		$this->load->library('table');
 		
+		// gerencia a paginacao 
+		$this->load->library('pagination');
+		
 	}
 	
 	public function index(){
@@ -45,7 +48,7 @@ class Crud extends CI_Controller {
 		
 		
 		// validacao 
-		$this->form_validation->set_rules('nome','NOME','trim|required|alpha|max_length[50]|ucwords');
+		$this->form_validation->set_rules('nome','NOME','trim|required|max_length[50]|ucwords');
 		$this->form_validation->set_rules('email','EMAIL','trim|required|strtolower|valid_email||max_lenght[50]|is_unique[curso_ci.email]');
 		$this->form_validation->set_rules('login','LOGIN','trim|required|strtolower|max_lenght[50]|is_unique[curso_ci.login]');
 		$this->form_validation->set_rules('senha','SENHA','trim|required|max_lenght[50]');
@@ -69,12 +72,24 @@ class Crud extends CI_Controller {
 		$this->load->view('crud',$dados);	
 	}
 	
-	public function retrieve(){
+	public function retrieve($offset=0){
+		
+		/* paginacao begin */
+		$limite = 2;
+		
+		$config['base_url'] = base_url().'/crud/retrieve/';
+		$config['total_rows'] = $this->db->get('curso_ci')->num_rows(); //estou pegando direto sem passar pelo model pq o metodo get_all precisa dos parametros de limite/offset - q e tipo um incremento ex. de 5 em 5 ou 2 em 2
+		$config['per_page'] = $limite; 
+		
+		$this->pagination->initialize($config);
+		// lenbrando que a paginacao ainda esta no array de dados e na pagina que traz o resultado ... retrieve que onde ele exibi a paginacao propriamente dita   
+		/* paginacao end */
 		
 		$dados = array(
 			'titulo'=>'Crud &raquo; Retrieve',
 			'tela'=>'retrieve',
-			'usuarios'=>$this->crud->get_all()->result()
+			'usuarios'=>$this->crud->get_all($limite,$offset)->result(), //limite e offset definem a paginacao ou seja o numero de itens na pagina e de qtos em qtos registro devo  mover 
+			'paginacao'=>$this->pagination->create_links()
 		);
 		
 		$this->load->view('crud',$dados);	

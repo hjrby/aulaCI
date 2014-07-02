@@ -46,8 +46,9 @@ class Crud_model extends CI_Model{
 		endif;
 	}
 	
-	public function get_all()
+	public function get_all($limite, $offset)
 	{
+		$this->db->limit($limite,$offset);
 		return $this->db->get('curso_ci');
 	}
 	
