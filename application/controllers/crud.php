@@ -72,7 +72,7 @@ class Crud extends CI_Controller {
 		$this->load->view('crud',$dados);	
 	}
 	
-	public function retrieve($offset=0){
+	public function retrieve($offset=0){ //inicializa a variavel do offset para nao dar pau
 		
 		/* paginacao begin */
 		$limite = 2;
