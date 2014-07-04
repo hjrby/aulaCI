@@ -5,7 +5,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title><?php echo $titulo; ?></title>
+		<title>GENERATOR JUNIRO TABAJARA</title>
 
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
@@ -57,6 +57,9 @@
 	<body>
 		<div >
 				<?php 
+				
+				
+					echo 'O segmento é => '.$segmento;
 					//echo print_r($propriedades);
 					echo '<table class="table table-hover">' ;
 					echo ' 
@@ -88,6 +91,13 @@
 			
 			<div>
 				<h1>MODEL</h1>
+				Passos:
+				<pre>					
+					<ul>
+						<li> <?php echo 'criar uma arquivo em /application/model/ com o nome '.$prop_array[0]['table_name'].'_model.php <br> ex.: '.'/application/model/'.$prop_array[0]['table_name'].'_model.php'; ?></li>
+						<li> <?php echo 'copiar o conteúdo abaixo no arquivo criado acima'; ?></li>
+					</ul>
+				</pre>
 				<?php 
 			echo '<pre>';	
 echo '<?php if ( ! defined(\'BASEPATH\')) exit(\'No direct script access allowed\');'.'<br>';
@@ -159,17 +169,175 @@ echo '}'.'<br>'; // fim da classe
 			
 			<div>
 				<h1>VIEW</h1>
+				Passos:
+				<pre>					
+					<ul>
+						<li> <?php echo 'criar uma arquivo em /application/view/ com o nome '.$prop_array[0]['table_name'].'.php <br> ex.: '.'/application/view/'.$prop_array[0]['table_name'].'.php'; ?></li>
+						<li> <?php echo 'copiar o conteúdo abaixo no arquivo criado acima'; ?></li>
+					</ul>
+				</pre>
+				<pre>
+					<?php
+						echo htmlspecialchars('<?php').'<br>';
+						echo '$this->load->view(\'includes/header\');'.'<br>';
+						echo '$this->load->view(\'includes/menu\');'.'<br>';
+						echo 'if($tela!=\'\') $this->load->view(\'telas/\'.$tela);'.'<br>';
+						echo '$this->load->view(\'includes/footer\');'.'<br>';
+					?>
+				</pre>
 				
-				<?php 
-				echo '<pre>';
-				echo '</pre>';
-				?>
+				<ul>
+					<li>
+						<h3>VIEW CREATE</h3>
+						Passos:
+						<pre>					
+							<ul>
+								<li> <?php 
+								echo 'criar uma arquivo em /application/view/telas/ com o nome '.$prop_array[0]['table_name'].'_create.php <br> ex.: '
+								.'/application/view/telas/'.$prop_array[0]['table_name'].'_create.php'; ?>
+								</li>
+								<li> copiar o conteúdo abaixo no arquivo criado acima </li>
+							</ul>
+						</pre>
+						<pre>
+							<?php 
+							
+							// EXIBE NA TELA 
+							echo htmlspecialchars('<?php').'<br>';
+							echo htmlspecialchars('echo"<div class=\"container-fluid\">";').'<br>';
+								echo htmlspecialchars('echo "<div class=\"row\">";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">teste</div>";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-8\">";').'<br>';
+										
+										echo 'echo form_open(\''.$prop_array[0]['table_name'].'/create\',array(\'role\'=>\'form\'));'.'<br>';
+										echo htmlspecialchars('if ($this->session->flashdata(\'cadastrook\')) :').'<br>';
+											echo htmlspecialchars('echo \'<p>\'.$this->session->flashdata(\'cadastrook\').\'</p>\';').'<br>';
+										echo htmlspecialchars('endif;').'<br>';
+										foreach ($propriedades as $propriedade) {
+											echo htmlspecialchars('echo "<div class=\"form-group\">";').'<br>';
+											if($propriedade->COLUMN_KEY != 'PRI'):
+												echo 'echo form_label(\''.$propriedade->column_name.'\',\'lbl'.$propriedade->column_name.'\',array(\'for\'=>\'input'.$propriedade->column_name.'1\'));'.'<br>';
+												echo 'echo form_input(array(\'name\'=>\''.$propriedade->column_name.'\',\'class\'=>\'form-control\', \'id\'=>\'input'
+												.$propriedade->column_name.'1\', \'placeholder\'=>\'Digite um valor \'),set_value(\''.$propriedade->column_name.'\'));'.'<br>';
+												echo htmlspecialchars('echo form_error(\''.$propriedade->column_name.'\');').'<br>';
+									
+											endif;
+											echo htmlspecialchars('echo "</div>";').'<br>';
+										}	
+											echo htmlspecialchars('echo "<div class=\"form-group\">";').'<br>';
+												echo htmlspecialchars('echo form_submit(array(\'name\'=>\'cadastrar\',\'class\'=>\'btn btn-default\'),\'Cadastrar\');').'<br>';
+											echo htmlspecialchars('echo "</div>";').'<br>';
+											echo htmlspecialchars('echo form_close();').'<br>';
+											
+									echo htmlspecialchars('echo "</div>";').'<br>';
+								
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">.col-md-2</div>";').'<br>';
+								
+								echo htmlspecialchars('echo "</div>";').'<br>';
+							echo htmlspecialchars('echo "</div>";').'<br>';
+				/*			
+//GERA ARQUIVO FISICO
+			
+//$File = $_SERVER['DOCUMENT_ROOT'].'/application/view/telas/'.$prop_array[0]['table_name'].'_create.php';
+//$File = '/application/view/telas/'.$prop_array[0]['table_name'].'_create.txt';
+$File = $prop_array[0]['table_name'].'_create.php';
+ //$File = "YourFile.txt"; 
+$Handle = fopen($File, 'w');
+$Data = 
+htmlspecialchars('<?php').'<br>'.
+htmlspecialchars('echo"<div class=\"container-fluid\">";').'<br>'.
+htmlspecialchars('echo "<div class=\"row\">";').'<br>'.
+htmlspecialchars('echo "<div class=\"col-md-2\">teste</div>";').'<br>'.
+htmlspecialchars('echo "<div class=\"col-md-8\">";').'<br>'.
+'echo form_open(\''.$prop_array[0]['table_name'].'/create\',array(\'role\'=>\'form\'));'.'<br>'.
+htmlspecialchars('if ($this->session->flashdata(\'cadastrook\')):').'<br>'.
+htmlspecialchars('echo \'<p>\'.$this->session->flashdata(\'cadastrook\').\'</p>\';').'<br>'.
+htmlspecialchars('endif;').'<br>';
+foreach ($propriedades as $propriedade) {
+	$Data = $Data.htmlspecialchars('echo "<div class=\"form-group\">";').'<br>'.
+	'echo form_label(\''.$propriedade->column_name.'\',\'lbl'.$propriedade->column_name.'\',array(\'for\'=>\'input'.$propriedade->column_name.'1\'));'.'<br>'.
+	'echo form_input(array(\'name\'=>\''.$propriedade->column_name.'\',\'class\'=>\'form-control\', \'id\'=>\'input'
+	.$propriedade->column_name.'1\', \'placeholder\'=>\'Digite um valor \'),set_value(\''.$propriedade->column_name.'\'));'.'<br>'.
+	htmlspecialchars('echo form_error(\'nome\');').'<br>'.
+	htmlspecialchars('echo "</div>";').'<br>';
+}	
+$Data = $Data.htmlspecialchars('echo "<div class=\"form-group\">";').'<br>'.
+htmlspecialchars('echo form_submit(array(\'name\'=>\'cadastrar\',\'class\'=>\'btn btn-default\'),\'Cadastrar\');').'<br>'.
+htmlspecialchars('echo "</div>";').'<br>'.
+htmlspecialchars('echo form_close();').'<br>'.
+htmlspecialchars('echo "</div>";').'<br>'.
+htmlspecialchars('echo "<div class=\"col-md-2\">.col-md-2</div>";').'<br>'.
+htmlspecialchars('echo "</div>";').'<br>'.
+htmlspecialchars('echo "</div>";').'<br>'.
+ 
+ 
+fwrite($Handle, $Data); 
+print "Data Written"; 
+fclose($Handle); 
+//echo $File;
+	*/						?>
+						</pre>
+				    </li>
+					
+					<li>
+						<h3>VIEW DELETE</h3>
+						Passos:
+						<pre>					
+							<ul>
+								<li> <?php 
+								echo 'criar uma arquivo em /application/view/includes/ com o nome '.$prop_array[0]['table_name'].'_delete.php <br> ex.: '
+								.'/application/view/'.$prop_array[0]['table_name'].'_delete.php'; ?>
+								</li>
+								<li> copiar o conteúdo abaixo no arquivo criado acima </li>
+							</ul>
+						</pre>
+						<pre>
+							
+						</pre>
+				    </li>
+					
+					<li>
+						<h3>VIEW EDITE</h3>
+						Passos:
+						<pre>					
+							<ul>
+								<li> <?php 
+								echo 'criar uma arquivo em /application/view/includes/ com o nome '.$prop_array[0]['table_name'].'_edite.php <br> ex.: '
+								.'/application/view/'.$prop_array[0]['table_name'].'_edite.php'; ?>
+								</li>
+								<li> copiar o conteúdo abaixo no arquivo criado acima </li>
+							</ul>
+						</pre>
+						<pre>
+							
+						</pre>
+				    </li>
+					
+					<li>
+						<h3>VIEW RETRIEVE</h3>
+						Passos:
+						<pre>					
+							<ul>
+								<li> <?php 
+								echo 'criar uma arquivo em /application/view/includes/ com o nome '.$prop_array[0]['table_name'].'_retrieve.php <br> ex.: '
+								.'/application/view/'.$prop_array[0]['table_name'].'_retrieve.php'; ?>
+								</li>
+								<li> copiar o conteúdo abaixo no arquivo criado acima </li>
+							</ul>
+						</pre>
+						<pre>
+							
+						</pre>
+				    </li>
+				</ul>
 				
 			</div>
 			
 			
 			<div>
-				<h1>CONTROLER</h1>
+				<h1>CONTROLLER</h1>
 				
 				<?php 
 				echo '<pre>';
@@ -177,7 +345,7 @@ echo '}'.'<br>'; // fim da classe
 					$prop;
 					echo '<p>'.htmlspecialchars('<?php if ( ! defined(\'BASEPATH\')) exit(\'No direct script access allowed\');').'</p>';
 
-					echo 'class '.ucfirst($prop_array[0]['table_name']).'_controller extends CI_Controller{';
+					echo 'class '.ucfirst($prop_array[0]['table_name']).' extends CI_Controller{';
 					
 					
 					echo 'public function __construct(){'.'<br>';
@@ -228,11 +396,12 @@ echo '}'.'<br>'; // fim da classe
 						
 						echo '// validacao '.'<br>';
 					foreach ($propriedades as $propriedade) {
-						
-						$v_required = $propriedade->IS_NULLABLE == 'NO' ? '|required' : '';
-						$v_max_length = $propriedade->DATA_TYPE == 'varchar' ? '|max_length['.$propriedade->CHARACTER_MAXIMUM_LENGTH.']' : '';
-						//echo $v_max_length;
-						echo '$this->form_validation->set_rules(\''.$propriedade->column_name.'\',\''.strtoupper($propriedade->column_name).'\',\'trim'.$v_required.$v_max_length.'\');'.'<br>';
+						if($propriedade->COLUMN_KEY != 'PRI'):
+							$v_required = $propriedade->IS_NULLABLE == 'NO' ? '|required' : '';
+							$v_max_length = $propriedade->DATA_TYPE == 'varchar' ? '|max_length['.$propriedade->CHARACTER_MAXIMUM_LENGTH.']' : '';
+							//echo $v_max_length;
+							echo '$this->form_validation->set_rules(\''.$propriedade->column_name.'\',\''.strtoupper($propriedade->column_name).'\',\'trim'.$v_required.$v_max_length.'\');'.'<br>';
+						endif;
 						
 					} 
 						echo '//executa a validacao'.'<br>';
@@ -240,18 +409,20 @@ echo '}'.'<br>'; // fim da classe
 							echo '//echo \'Validacao ok pode inserir no banco de dados\';'.'<br>';
 					
 							$form_elements = '$dados = elements(array(';
-					foreach ($propriedades as $propriedade) {		
+					foreach ($propriedades as $propriedade) {
+						if($propriedade->COLUMN_KEY != 'PRI'):		
 							//echo '$dados = elements(array(\'nome\',\'email\',\'login\',\'senha\'), $this->input->post());'.'<br>';
 							$form_elements = $form_elements.'\''.$propriedade->column_name.'\',';
+						endif;
 					}		
-							echo substr($form_elements,0,strlen($form_elements)-1).'\'), $this->input->post());'.'<br>';
+							echo substr($form_elements,0,strlen($form_elements)-2).'\'), $this->input->post());'.'<br>';
 							//echo '//print_r($dados);'.'<br>';
 							echo '$this->'.$prop_array[0]['table_name'].'_model->do_insert($dados);'.'<br>';
 						echo 'endif;'.'<br>';
 						
 						echo '$dados = array('.'<br>';
 							echo '\'titulo\'=>\''.$prop_array[0]['table_name'].' &raquo; Create\','.'<br>';
-							echo '\'tela\'=>\'create\''.'<br>';
+							echo '\'tela\'=>\''.$prop_array[0]['table_name'].'_create\''.'<br>';
 						echo ');'.'<br>';
 						
 						echo '$this->load->view(\''.$prop_array[0]['table_name'].'\',$dados);	'.'<br>';
