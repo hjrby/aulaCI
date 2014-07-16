@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://aula.ci/';
+$config['base_url']	= 'http://aula.dev/';
 
 /*
 |--------------------------------------------------------------------------

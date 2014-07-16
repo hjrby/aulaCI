@@ -294,7 +294,27 @@ fclose($Handle);
 							</ul>
 						</pre>
 						<pre>
-							
+							<?php 
+							echo htmlspecialchars('<?php').'<br>';
+							// EXIBE NA TELA 
+							echo htmlspecialchars('<?php').'<br>';
+							echo htmlspecialchars('echo"<div class=\"container-fluid\">";').'<br>';
+								echo htmlspecialchars('echo "<div class=\"row\">";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">teste</div>";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-8\">";').'<br>';
+									
+									
+									
+									
+									echo htmlspecialchars('echo "</div>";').'<br>';
+								
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">.col-md-2</div>";').'<br>';
+								
+								echo htmlspecialchars('echo "</div>";').'<br>';
+							echo htmlspecialchars('echo "</div>";').'<br>';
+							?>
 						</pre>
 				    </li>
 					
@@ -311,7 +331,27 @@ fclose($Handle);
 							</ul>
 						</pre>
 						<pre>
-							
+							<?php 
+							echo htmlspecialchars('<?php').'<br>';
+							// EXIBE NA TELA 
+							echo htmlspecialchars('<?php').'<br>';
+							echo htmlspecialchars('echo"<div class=\"container-fluid\">";').'<br>';
+								echo htmlspecialchars('echo "<div class=\"row\">";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">teste</div>";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-8\">";').'<br>';
+									
+									
+									
+									
+									echo htmlspecialchars('echo "</div>";').'<br>';
+								
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">.col-md-2</div>";').'<br>';
+								
+								echo htmlspecialchars('echo "</div>";').'<br>';
+							echo htmlspecialchars('echo "</div>";').'<br>';
+							?>
 						</pre>
 				    </li>
 					
@@ -328,7 +368,71 @@ fclose($Handle);
 							</ul>
 						</pre>
 						<pre>
-							
+							<?php 
+							echo htmlspecialchars('<?php').'<br>';
+							// EXIBE NA TELA 
+							echo htmlspecialchars('<?php').'<br>';
+							echo htmlspecialchars('echo"<div class=\"container-fluid\">";').'<br>';
+								echo htmlspecialchars('echo "<div class=\"row\">";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">teste</div>";').'<br>';
+									
+									echo htmlspecialchars('echo "<div class=\"col-md-8\">";').'<br>';
+									
+									
+									echo htmlspecialchars('echo \'<h2>Lista de '.$prop_array[0]['table_name'].'</h2>\';').'<br>';
+			
+									echo htmlspecialchars('if ($this->session->flashdata(\'excluirok\')) :').'<br>';
+										echo htmlspecialchars('echo \'<p>\'.$this->session->flashdata(\'excluirok\').\'</p>\';').'<br>';
+									echo htmlspecialchars('endif;').'<br>';
+									
+									echo htmlspecialchars( 'echo \'<table class="table table-hover">\' ;').'<br>';
+									echo htmlspecialchars('echo \' 
+									<thead>
+										<tr>').'<br>';
+										
+											
+										foreach ($propriedades as $propriedade) {
+											if($propriedade->COLUMN_KEY != 'PRI'):
+												echo htmlspecialchars('<td>'.$propriedade->column_name.'</td>').'<br>';
+											endif;
+										}	
+
+										echo htmlspecialchars('<td>Ação</td>').'<br>';
+										echo htmlspecialchars('</tr>
+									</thead>
+									<tbody>\';').'<br>';
+									
+										echo htmlspecialchars('foreach ($usuarios as $linha) {').'<br>';
+											echo htmlspecialchars('echo \'<tr>\';').'<br>';												
+												foreach ($propriedades as $propriedade) {
+													if($propriedade->COLUMN_KEY != 'PRI'):
+														//echo htmlspecialchars('echo <td>'.$propriedade->column_name.'</td>;').'<br>';
+														//echo htmlspecialchars('\'<td>\'.$linha->'.$propriedade->column_name.'.\'</td>\'').'<br>';
+														echo htmlspecialchars('echo \'<td>\'.$linha->'.$propriedade->column_name.'.\'</td>\';').'<br>';
+													endif;
+												}	
+												echo htmlspecialchars('.\'<td>\'').'<br>';
+												echo htmlspecialchars('.anchor("crud/update/$linha->id",\'<span class="glyphicon glyphicon-pencil"></span>\').\' - \'').'<br>';
+												echo htmlspecialchars('.anchor("crud/delete/$linha->id",\'<span class="glyphicon glyphicon-remove"></span>\')').'<br>';
+												echo htmlspecialchars('.\'</td>\'').'<br>';
+											echo htmlspecialchars('.\'</tr>\';').'<br>';
+										echo htmlspecialchars('}').'<br>';
+				
+										echo htmlspecialchars(' echo \'</tbody></table>\';').'<br>';
+			
+										echo htmlspecialchars('echo !empty($paginacao)? $paginacao : \'\' ;').'<br>';
+				
+				
+				
+				
+									echo htmlspecialchars('echo "</div>";').'<br>';
+								
+									echo htmlspecialchars('echo "<div class=\"col-md-2\">.col-md-2</div>";').'<br>';
+								
+								echo htmlspecialchars('echo "</div>";').'<br>';
+							echo htmlspecialchars('echo "</div>";').'<br>';
+							?>
 						</pre>
 				    </li>
 				</ul>
@@ -443,7 +547,7 @@ fclose($Handle);
 						
 						echo '$dados = array('.'<br>';
 							echo '\'titulo\'=>\''.$prop_array[0]['table_name'].' &raquo; Retrieve\','.'<br>';
-							echo '\'tela\'=>\'retrieve\','.'<br>';
+							echo '\'tela\'=>\''.$prop_array[0]['table_name'].'_retrieve\','.'<br>';
 							echo '\'usuarios\'=>$this->crud->get_all($limite,$offset)->result(), //limite e offset definem a paginacao ou seja o numero de itens na pagina e de qtos em qtos registro devo  mover '.'<br>';
 							echo '\'paginacao\'=>$this->pagination->create_links()'.'<br>';
 						echo ');'.'<br>';
